@@ -1,0 +1,167 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "app.dataminingb27",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.17.3",
+      "toolsId": "6db19cca-5b62-468d-900d-184fcfed0631"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/Z_MINING_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "datamining-manage": {
+          "semanticObject": "datamining",
+          "action": "manage",
+          "title": "{{datamining-manage.flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.135.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "app.dataminingb27.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {}
+      },
+      "CustomerModel":{
+        "type":"sap.ui.model.json.JSONModel"
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "app.dataminingb27.view",
+        "async": true,
+        "viewPath": "app.dataminingb27.view"
+      },
+      "routes": [
+        {
+          "name": "RouteDataMiningView",
+          "pattern": ":?query:",
+          "target": [
+            "TargetDataMiningView"
+          ]
+        },
+        {
+          "name": "RouteCreateView",
+          "pattern": "create",
+          "target": [
+            "TargetCreateView"
+          ]
+        },
+        {
+          "name": "RouteDetailView",
+          "pattern": "detail/{index}",
+          "target": [
+            "TargetDetailView"
+          ]
+        },
+        {
+          "name": "RouteUpdateView",
+          "pattern": "update/{index}",
+          "target":[
+            "TargetUpdateView"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetDataMiningView": {
+          "id": "DataMiningView",
+          "name": "DataMiningView"
+        },
+        "TargetCreateView": {
+          "id": "idCreatePage",
+          "name": "CreateView"
+        },
+        "TargetDetailView": {
+          "id": "idDetail",
+          "name": "DetailView"
+        },
+        "TargetUpdateView":{
+          "id": "idUpdate",
+          "name": "UpdateView"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "app.dataminingb27.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "appdataminingb27"
+  }
+}
