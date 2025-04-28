@@ -8,26 +8,6 @@ sap.ui.define([
     "use strict";
 
     return Controller.extend("app.dataminingb27.controller.DataMiningView", {
-        // onInit() {
-        //     this._getData()
-        // },
-        //     _getData:function(){
-        //         let oModel = this.getModel();
-        //         let entity = "/YUKTI_MININGSet";
-    
-        //         oModel.read(entity, {
-        //             success: (odata, resp) => {
-        //                let jModel= this.getModel(odata.results)
-        //                     this.getView().setModel(jModel,"CustomerModel")
-        //                 // let oModelJs = new sap.ui.model.json.JSONModel(odata.results);
-        //                 // this.getView().setModel(oModelJs, "CustomerModel");
-        //             },
-        //             error: (error) => {
-        //                 console.error("Error reading data: ", error);
-        //                 // Additional error handling logic
-        //             }
-        //         });
-        //     },
         onInit() {
             this._getData();
         },
@@ -102,7 +82,6 @@ sap.ui.define([
                 let key3 = param.AllocatedMiningResource;
 
                 key2=key2.replace(/ /g, "%20");
-
     
                 let oModel = this.getOwnerComponent().getModel();
                 let entity = `/YUKTI_MININGSet(LocationId='${key1}',LocationDescription='${key2}',AllocatedMiningResource='${key3}')`;

@@ -52,18 +52,13 @@ sap.ui.define([
    
           var NoDrill=parseInt(parm.NumberOfDrills) 
         //   need to be changed
-   
-   
-     
           let oModel = this.getOwnerComponent().getModel();
-          let entity = "/YUKTI_MININGSet(LocationId='" + key1 + "',LocationDescription='" + key2 + "',AllocatedMiningResource='" + key3 + "')";
-                                                             
-   
+          let entity = "/YUKTI_MININGSet(LocationId='"+ key1 +"',LocationDescription='" + key2 + "',AllocatedMiningResource='" + key3 + "')";
           let updatedData = {
               TotalCost: parm.TotalCost,
-              PossibleMineralReport: parm.PossibleMineralReport,
+              PossibleMineralReport: parm.PossibleMineralReport.toUpperCase(),
               NumberOfDrills: NoDrill,
-              TypeOfMineral: parm.TypeOfMineral
+              TypeOfMineral: parm.TypeOfMineral.toUpperCase()
           };
           console.log("Payload being sent:", updatedData);
           oModel.update(entity, updatedData, {
@@ -72,7 +67,8 @@ sap.ui.define([
                   MessageBox.success("Record Updated", {
                       onClose: function() {
                           var oRouter = this.getOwnerComponent().getRouter();
-                          oRouter.navTo("RouteDataminingView", {}, true);
+                          oRouter.navTo("RouteDataMiningView", {}, true);
+                          location.reload();
                       }.bind(this)
                   });
               },
@@ -84,7 +80,7 @@ sap.ui.define([
       onView:function(){
         let oRoute = this.getOwnerComponent().getRouter();
               //oRoute.initialize();
-              oRoute.navTo("RouteDetailView");
+              oRoute.navTo("RouteDataMiningView");
        
       }
     });

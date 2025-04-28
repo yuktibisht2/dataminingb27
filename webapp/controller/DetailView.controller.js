@@ -13,7 +13,6 @@ sap.ui.define([
             oRoute.attachPatternMatched(this._onPatternMatched, this);
             // this._getData();
         },
-
         onRouteMatched: function (oEvent) {
             let index = oEvent.getParameter("arguments").index;
             let sPath = "CustomerModel>/" + index;
@@ -24,8 +23,6 @@ sap.ui.define([
         _onPatternMatched: function () {
             this._getData();
         },
-
-
         _getData: function () {
             let enititySet = `/YUKTI_MININGSet`;
             let oModel = this.getOwnerComponent().getModel();
@@ -49,7 +46,7 @@ sap.ui.define([
                 index: id
             });
         },
-        onDataminingView: function () {
+        onDataMiningView: function () {
             let oRouter = this.getOwnerComponent().getRouter();
             oRouter.navTo("RouteDataMiningView")
         }

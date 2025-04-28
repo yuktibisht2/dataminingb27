@@ -9,9 +9,26 @@ sap.ui.define([
   
     return Controller.extend("app.dataminingb27.controller.CreateView", {
         onInit: function() {
+            let oView = this.getView();
+            let fieldIds =  ["LocationIdInput", "LocationDescriptionInput", "AllocatedMiningResourceInput", "TotalCostInput", "PossibleMineralReportInput", "NumberOfDrillsInput", "TypeOfMineralInput"];
+       
+            fieldIds.forEach(fieldId => {
+                oView.byId(fieldId).attachLiveChange(this.onSetNone, this);
+            });
+        },
 
+        onSetNone: function (oEvent) {
+            oEvent.getSource().setValueState("None");
+        },
+        _clearFields: function () {
+            let oView = this.getView();
+            ["LocationIdInput", "LocationDescriptionInput", "AllocatedMiningResourceInput", "TotalCostInput", "PossibleMineralReportInput", "NumberOfDrillsInput","TypeOfMineralInput"].forEach(fieldId => {
+                oView.byId(fieldId).setValue("");
+                oView.byId(fieldId).setValueState("None");
+            });
         },
         onDataMiningView: function () {
+            this._clearFields()
             let oRouter = this.getOwnerComponent().getRouter();
             oRouter.navTo("RouteDataMiningView")
         },
@@ -26,17 +43,59 @@ sap.ui.define([
   
             // Get values
             let sLocationId = oLocationId.getValue();
-            let sLocationDescription = oLocationDescription.getValue();
-            let sAllocatedMiningResource = oAllocatedMiningResource.getValue();
+            let sLocationDescription = oLocationDescription.getValue().toUpperCase();
+            let sAllocatedMiningResource = oAllocatedMiningResource.getValue().toUpperCase();
             let sTotalCost = oTotalCost.getValue();
-            let sPossibleMineralReport = oPossibleMineralReport.getValue();
+            let sPossibleMineralReport = oPossibleMineralReport.getValue().toUpperCase();
             var sNumberOfDrills = oNumberOfDrills.getValue();
-            let sTypeOfMineral = oTypeOfMineral.getValue();
+            let sTypeOfMineral = oTypeOfMineral.getValue().toUpperCase();
 
             sNumberOfDrills=parseInt(sNumberOfDrills)
-
-
-  
+         
+            oLocationId.setValueState("None");
+            oLocationDescription.setValueState("None");
+            oAllocatedMiningResource.setValueState("None");
+            oTotalCost.setValueState("None");
+            oPossibleMineralReport.setValueState("None");
+            oNumberOfDrills.setValueState("None");
+            oTypeOfMineral.setValueState("None");
+ 
+ 
+ 
+                let hasError = false;
+                if (!sLocationId) {
+                    oLocationId.setValueState("Error");
+                    hasError = true;
+                }
+                if (!sLocationDescription) {
+                    oLocationDescription.setValueState("Error");
+                    hasError = true;
+                }
+                if (!sAllocatedMiningResource) {
+                    oAllocatedMiningResource.setValueState("Error");
+                    hasError = true;
+                }
+                if (!sTotalCost) {
+                    oTotalCost.setValueState("Error");
+                    hasError = true;
+                }
+                if (!sPossibleMineralReport) {
+                    oPossibleMineralReport.setValueState("Error");
+                    hasError = true;
+                }
+                if (!sNumberOfDrills) {
+                    oNumberOfDrills.setValueState("Error");
+                    hasError = true;
+                }
+                if (!sTypeOfMineral) {
+                    oTypeOfMineral.setValueState("Error");
+                    hasError = true;
+                }
+ 
+                if (hasError) {
+                    MessageBox.error("Please fill in all the fields.");
+                    return;
+                }
             // var odate = new Date(sOdate).getTime();
             // let fdate = "/Date(" + odate + ")/";
   
@@ -58,6 +117,7 @@ sap.ui.define([
                 success: function() {
                     MessageBox.success("Entry published Successfully", {
                         onClose: function() {
+                            that._clearFields()
                             let oRouter = that.getOwnerComponent().getRouter()
                             oRouter.navTo("RouteDataMiningView")
                             oLocationId.setValue("")
@@ -67,7 +127,7 @@ sap.ui.define([
                             oPossibleMineralReport.setValue("")
                             oNumberOfDrills.setValue("")
                             oTypeOfMineral.setValue("")
-  
+                            location.reload()
                         }
                     })
                 },

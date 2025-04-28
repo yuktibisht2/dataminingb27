@@ -3,22 +3,22 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:f="sap.ui.layout.form">
-    <Page id="idCreatePage" title="Create Data" showNavButton="true" navButtonPress="onDataminingView">
+    <Page id="idCreatePage" title="Create Data" showNavButton="true" navButtonPress="onDataMiningView">
         <content>
             <f:SimpleForm id="createForm" editable="true" layout="ResponsiveGridLayout">
-                <Label text="{i18n>Location Id}" required="true"/>
+                <Label text="{i18n>LocationId}" required="true"/>
                 <Input id="LocationIdInput" value="{LocationId}" width="250px" />
-                <Label text="{i18n>Location Description}" required="true"/>
+                <Label text="{i18n>LocationDescription}" required="true"/>
                 <Input id="LocationDescriptionInput" value="{LocationDescription}" width="250px" />
-                <Label text="{i18n>Mining Resource Allocated}" required="true"/>
+                <Label text="{i18n>AllocatedMiningResource}" required="true"/>
                 <Input id="AllocatedMiningResourceInput" value="{MiningResourceAllocated}" width="250px" />
-                <Label text="{i18n>Total Cost}"/>
-                <Input id="TotalCostInput" value="{TotalCost}" width="250px" placeholder="Eg: 500000"/>
-                <Label text="{i18n>Report Of Possible Mineral}"/>
+                <Label text="{i18n>TotalCost}"/>
+                <Input id="TotalCostInput" value="{TotalCost}" width="250px"/>
+                <Label text="{i18n>PossibleMineralReport}"/>
                 <Input id="PossibleMineralReportInput" value="{ReportOfPossibleMineral}" width="250px" />
-                <Label text="{i18n>Number Of Drills}"/>
+                <Label text="{i18n>NumberOfDrills}"/>
                 <Input id="NumberOfDrillsInput" value="{NumberOfDrills}" width="250px" />
-                <Label text="{i18n>Type Of Mineral}"/>
+                <Label text="{i18n>TypeOfMineral}"/>
                 <Input id="TypeOfMineralInput" value="{TypeOfMineral}" width="250px"/>
             </f:SimpleForm>
         </content>
